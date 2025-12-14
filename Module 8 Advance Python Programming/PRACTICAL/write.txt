@@ -1,0 +1,2 @@
+This is my first Opening and closing file program.
+Thank you for visit in my write.txt file.
