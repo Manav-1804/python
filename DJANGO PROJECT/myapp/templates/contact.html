@@ -11,7 +11,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-
+<style>
+    tr,td{
+        padding: 10px;
+    }
+</style>
 <body>
     <h1>Contact</h1>
     {% if msg%}
@@ -43,6 +47,11 @@
             </tr>
         </table>
     </form>
+    <h1>Recent Contact</h1>
+    {% for i in contacts %}
+        Name = {{i.name}}<br>
+        Remarks = {{i.remarks}}<hr>
+    {% endfor %}
 </body>
 </html>
 {% endblock %}

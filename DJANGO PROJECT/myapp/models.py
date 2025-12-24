@@ -9,3 +9,16 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class User(models.Model):
+    fname=models.CharField(max_length=100)
+    lname=models.CharField(max_length=100)
+    email=models.EmailField()
+    mobile=models.BigIntegerField()
+    address=models.TextField()
+    password=models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.fname+ " " + self.lname
+
