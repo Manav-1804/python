@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from .models import Contact,User
+from django.http import HttpResponse
+from django.core.mail import send_mail
+from django.conf import settings
+import random
 def index(request):
     return render(request,'index.html')
 
@@ -99,3 +103,42 @@ def change_password(request):
      else:
            
         return render(request,'change_password.html')
+     
+def forgot_password(request):
+     if request.method=="POST":
+          try:
+               user=User.objects.get(email=request.POST['email'])
+               to=request.POST['email']
+               subject="OTP For Forgot Password"
+               otp=random.randint(1000,9999)
+               message="Your OTP For Forgot Password Is  "+str(otp)
+               send_mail(subject,message,settings.EMAIL_HOST_USER,[to,])
+               request.session['email_to']=to
+               request.session['otp']=otp
+               return render(request,'otp.html')
+          except:
+               msg="Email Not Registered"
+               return render(request,'forgot_password.html',{'msg':msg})
+     else:
+          
+          return render(request,'forgot_password.html')
+
+def verify_otp(request):
+     if int(request.POST['otp'])==int(request.session['otp']):
+          del request.session['otp']
+          return render(request,'new_password.html')
+     else:
+          msg="Invalid OTP"
+          return render(request,'otp.html',{'msg':msg})
+     
+def new_password(request):
+     if request.POST['new_password']==request.POST['cnew_password']:
+          user=User.objects.get(email=request.session['email_to'])
+          user.password=request.POST['new_password']
+          user.save()
+          del request.session['email_to']
+          msg="Password Updated Successfully"
+          return render(request,'login.html',{'msg':msg})
+     else:
+          msg="New Password & Confirm New Password Does Not Matched"
+          return render(request,'new_password.html',{'msg':msg})
