@@ -1,0 +1,60 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+</head>
+
+<body>
+   
+
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="section-title">
+                    <h4>My product</h4>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <ul class="filter__controls">
+                    <li class="active"><a href="{% url 'seller-view-product' cat='all' %}">All</a></li>
+                    <li><a href="{% url 'seller-view-product' cat='men' %}">Men</a></li>
+                    <li><a href="{% url 'seller-view-product' cat='women' %}">Women</a></li>
+                    <li><a href="{% url 'seller-view-product' cat='kids' %}">Kids</a></li>
+                    <li><a href="{% url 'seller-view-product' cat='accessories' %}">Accessories</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row property__gallery">
+            {% for i in products %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mix women">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="{{i.product_image.url}}">
+                        <div class="label new">New</div>
+                        <ul class="product__hover">
+                            <li><a href="{% url 'seller-product-details' pk=i.pk %}">
+                                <span class="arrow_expand"></span></a></li>
+                            
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">{{i.product_name}}</a></h6>
+                        
+                        <div class="product__price">Rs. {{i.product_price}}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->
+
+<!-- Instagram End -->
+</body>
+</html>
+{% endblock %}

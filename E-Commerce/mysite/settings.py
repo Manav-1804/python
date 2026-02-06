@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
-from pathlib import Path
+from pathlib import Path 
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -119,3 +119,6 @@ STATIC_URL = 'static/'
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STRIPE_PUBLIC_KEY='pk_test_51MshH6SJuXwPfjjrrgxJ5tubbOgYAhRrqNcd4RDUSq1peWpIMZrjhIiTncSUWO9u6byeDf4KxdZPkFD4hU55mVOg00aRL5RT8x'
+STRIPE_PRIVATE_KEY='sk_test_51MshH6SJuXwPfjjry2IkUKMu8iyfVbVspwNw3RvLshMUCMRRCiNSeWmf17dCfVe0IFHRwq3zYTOc2NBXFSHKbVMw00rJtyc3CY'

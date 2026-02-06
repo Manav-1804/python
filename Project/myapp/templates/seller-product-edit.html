@@ -1,0 +1,87 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+</head>
+
+<body>
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <span>Edit Product</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="contact__content">
+                       
+                        <div class="contact__form">
+                            <h5>Edit Product</h5>
+                            {% if msg %}
+                                <b style="color: blue;">{{msg}}</b>
+                            {% endif %}
+                            <form action="{% url 'seller-product-edit' pk=product.pk %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <select name="product_category">
+                                    {% if product.product_category == "men" %}
+                                        <option>----Select Product Category----</option>
+                                        <option value="men" selected>men</option>
+                                        <option value="women">women</option>
+                                        <option value="kids">kids</option>
+                                        <option value="accessories">accessories</option>
+                                    {% elif product.product_category == "women" %}
+                                        <option>----Select Product Category----</option>
+                                        <option value="men">men</option>
+                                        <option value="women" selected>women</option>
+                                        <option value="kids">kids</option>
+                                        <option value="accessories">accessories</option>
+                                    {% elif product.product_category == "kids" %}
+                                        <option>----Select Product Category----</option>
+                                        <option value="men">men</option>
+                                        <option value="women">women</option>
+                                        <option value="kids" selected>kids</option>
+                                        <option value="accessories">accessories</option>
+                                    {% elif product.product_category == "accessories" %}
+                                        <option>----Select Product Category----</option>
+                                        <option value="men">men</option>
+                                        <option value="women">women</option>
+                                        <option value="kids">kids</option>
+                                        <option value="accessories" selected>accessories</option>
+                                    {% endif %}
+                                    
+                                </select>
+                                <input type="text" name="product_name" value="{{product.product_name}}">
+                                <input type="text" name="product_price" value="{{product.product_price}}">
+                                <img src="{{product.product_image.url}}" style="width: 100px;height: 100px;border-radius: 50%;">
+                                <input type="file" name="product_image">
+                                <textarea placeholder="Product Details" name="product_desc">{{product.product_desc}}</textarea>
+                                
+                                <button type="submit" class="site-btn">Update Product</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+        </div>
+    </div>
+</section>
+<!-- Contact Section End -->
+
+</body>
+</html>
+{% endblock %}
